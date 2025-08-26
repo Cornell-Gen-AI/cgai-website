@@ -26,32 +26,36 @@ export default function ApplyPage() {
             Join us.
           </p>
 
-          <div className="mt-10">
-            <Timeline items={items} />
-          </div>
-
-          <div className="mt-10">
-            <Link href="https://docs.google.com/forms/u/1/d/1E5yTo-NvoSspzyLJQ0XyaFozGajN6Z6-9Gdowfq4M0Y" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
-              Open Application Form
-            </Link>
-          </div>
-
-          <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6 md:gap-10">
-            {[{
-              q: "Who should apply?",
-              a: "Curious builders who like autonomy, fast iteration, and shipping.",
-            }, {
-              q: "What time commitment?",
-              a: "About 6–8 hours per week, including team meetings and build time.",
-            }, {
-              q: "Do I need prior AI experience?",
-              a: "No. We value product sense and execution. You'll learn on the job.",
-            }].map((f) => (
-              <div key={f.q} className="rounded-2xl bg-white/5 backdrop-blur p-6 shadow-sm shadow-black/20">
-                <h3 className="text-lg md:text-xl font-semibold text-zinc-100">{f.q}</h3>
-                <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed">{f.a}</p>
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div>
+              <Timeline items={items} />
+            </div>
+            
+            <div className="space-y-8">
+              <div>
+                <Link href="https://docs.google.com/forms/u/1/d/1E5yTo-NvoSspzyLJQ0XyaFozGajN6Z6-9Gdowfq4M0Y" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
+                  Open Application Form
+                </Link>
               </div>
-            ))}
+
+              <div className="space-y-4">
+                {[{
+                  q: "Who should apply?",
+                  a: "Curious builders who like autonomy, fast iteration, and shipping.",
+                }, {
+                  q: "What time commitment?",
+                  a: "About 6–8 hours per week, including team meetings and build time.",
+                }, {
+                  q: "Do I need prior AI experience?",
+                  a: "No. We value product sense and execution. You'll learn on the job.",
+                }].map((f) => (
+                  <div key={f.q} className="rounded-2xl bg-white/5 backdrop-blur p-6 shadow-sm shadow-black/20">
+                    <h3 className="text-lg md:text-xl font-semibold text-zinc-100">{f.q}</h3>
+                    <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed">{f.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Container>
       </Section>

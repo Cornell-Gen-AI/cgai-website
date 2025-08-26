@@ -3,8 +3,10 @@ import Link from "next/link";
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
 import Container from "../components/Container";
 import Section from "../components/Section";
-import LogoCloud from "../components/LogoCloud";
+
 import { Rocket, Briefcase, Wrench, BarChart3, Eye, Sparkles, Network, Smartphone, Leaf } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Marquee } from "@/components/magicui/marquee";
 
 export default function Home() {
   const prefersReducedMotion = useReducedMotion();
@@ -39,49 +41,50 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section>
+      <Section className="py-8 md:py-10">
+        <Container>
+          <h2 className="h2">Partners</h2>
+        </Container>
+        <div className="mt-6 relative flex w-full flex-col items-center justify-center overflow-hidden">
+          <Marquee pauseOnHover className="[--duration:10s]" repeat={6}>
+            {[
+              { src: "/quickfi-logo-01-1.png", alt: "QuickFi" },
+              { src: "/cisco.png", alt: "Cisco" },
+            ].map((logo) => (
+              <div
+                key={logo.alt}
+                className="flex items-center justify-center mx-4"
+              >
+                                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-20 w-auto object-contain"
+                  />
+              </div>
+            ))}
+          </Marquee>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black"></div>
+        </div>
+      </Section>
+
+      <Section className="py-8 md:py-10">
         <Container>
           <motion.div {...anim}>
             <h2 className="h2">Our Mission</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
-              Cornell Gen AI is a student-run club building startup-style, autonomous AI projects with real industry collaboration. We focus on shipping practical systems, not demos.
+              Cornell Gen AI is a student-run club building startup-style, autonomous AI projects with real industry collaboration. 
             </p>
             <p className="mt-3 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
               Members work in small, autonomous teams with mentorship from experienced builders and partners, gaining hands-on experience that translates directly to impactful careers and ventures.
             </p>
           </motion.div>
 
-          <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6 md:gap-10">
-            {[{
-              icon: <Rocket className="h-6 w-6" />,
-              title: "Startup Autonomy",
-              desc: "Operate like a startup: small teams, clear ownership, fast iteration.",
-            }, {
-              icon: <Briefcase className="h-6 w-6" />,
-              title: "Industry Mentorship",
-              desc: "Collaborate with partners and mentors who ship real products.",
-            }, {
-              icon: <Wrench className="h-6 w-6" />,
-              title: "Hands-on Projects",
-              desc: "Build deployed systems and tools, not slide decks.",
-            }].map((item) => (
-              <motion.div
-                key={item.title}
-                {...anim}
-                className="rounded-2xl bg-white/5 backdrop-blur p-6 shadow-sm shadow-black/20"
-              >
-                <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] text-white flex items-center justify-center shadow-md shadow-purple-500/20">
-                  {item.icon}
-                </div>
-                <h3 className="mt-4 text-lg md:text-xl font-semibold text-zinc-100">{item.title}</h3>
-                <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+
         </Container>
       </Section>
 
-      <Section>
+      <Section className="py-8 md:py-10">
         <Container>
           <motion.div {...anim}>
             <h2 className="h2">What We Offer</h2>
@@ -125,7 +128,7 @@ export default function Home() {
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                 
                 <div className="relative z-10">
-                  <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] text-white flex items-center justify-center shadow-md shadow-purple-500/20">
+                  <div className="h-14 w-14 rounded-xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] text-white flex items-center justify-center shadow-md shadow-purple-500/20 p-3">
                     {item.icon}
                   </div>
                   <h3 className="mt-4 text-lg md:text-xl font-semibold text-zinc-100">{item.title}</h3>
@@ -135,16 +138,6 @@ export default function Home() {
             ))}
           </div>
         </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <h2 className="h2">Partners</h2>
-          <p className="mt-2 text-zinc-400 text-sm md:text-base">We work with real collaborators. Placeholder logos shown.</p>
-        </Container>
-        <div className="mt-6">
-          <LogoCloud />
-        </div>
       </Section>
     </div>
   );
