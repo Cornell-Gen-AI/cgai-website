@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { motion, useReducedMotion, type MotionProps } from "framer-motion";
 import Container from "../components/Container";
 import Section from "../components/Section";
 
@@ -9,16 +8,6 @@ import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/magicui/marquee";
 
 export default function Home() {
-  const prefersReducedMotion = useReducedMotion();
-  const anim: Partial<MotionProps> = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 12 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.4 },
-        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-      };
-
   return (
     <div>
       <Section className="relative overflow-hidden py-16 md:py-20 lg:py-24">
@@ -27,7 +16,7 @@ export default function Home() {
           <div className="absolute -bottom-24 -right-16 h-[400px] w-[400px] rounded-full blur-3xl opacity-20 bg-gradient-to-r from-[#c55bff] via-[#7b5bff] to-[#5b9dff]"></div>
         </div>
         <Container>
-          <motion.div {...anim} className="py-8 md:py-10 lg:py-12">
+          <div className="py-8 md:py-10 lg:py-12">
             <h1 className="h1 font-semibold tracking-tight text-white">Cornell Gen AI</h1>
             <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
               Bridging students and industry leaders to build cutting-edge AI tools.
@@ -37,7 +26,7 @@ export default function Home() {
                 Apply now
               </Link>
             </div>
-          </motion.div>
+          </div>
         </Container>
       </Section>
 
@@ -70,7 +59,7 @@ export default function Home() {
 
       <Section className="py-8 md:py-10">
         <Container>
-          <motion.div {...anim}>
+          <div>
             <h2 className="h2">Our Mission</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
               Cornell Gen AI is a student-run club building startup-style, autonomous AI projects with real industry collaboration. 
@@ -78,7 +67,7 @@ export default function Home() {
             <p className="mt-3 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
               Members work in small, autonomous teams with mentorship from experienced builders and partners, gaining hands-on experience that translates directly to impactful careers and ventures.
             </p>
-          </motion.div>
+          </div>
 
 
         </Container>
@@ -86,12 +75,12 @@ export default function Home() {
 
       <Section className="py-8 md:py-10">
         <Container>
-          <motion.div {...anim}>
+          <div>
             <h2 className="h2">What We Offer</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
               Join Cornell Gen AI to access exclusive opportunities, cutting-edge technology, and a network of innovators.
             </p>
-          </motion.div>
+          </div>
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[{
@@ -119,9 +108,8 @@ export default function Home() {
               title: "Career Development",
               desc: "Prepare for the future of AI with personalized career guidance, impactful resume-building projects, access to networking events, and exposure to industry opportunities.",
             }].map((item) => (
-              <motion.div
+              <div
                 key={item.title}
-                {...anim}
                 className="group relative rounded-2xl bg-white/5 backdrop-blur p-6 shadow-sm shadow-black/20 border border-white/10 hover:bg-white/10 transition-all duration-300 overflow-hidden"
               >
                 {/* Shine effect */}
@@ -134,7 +122,7 @@ export default function Home() {
                   <h3 className="mt-4 text-lg md:text-xl font-semibold text-zinc-100">{item.title}</h3>
                   <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed">{item.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </Container>

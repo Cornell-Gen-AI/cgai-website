@@ -11,16 +11,16 @@ const executiveBoard = [
 ];
 
 const businessTeam = [
-  { name: "David Lee", role: "Business", imageSrc: "/pfps/david.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Merek Soriano", role: "Business", imageSrc: "/pfps/merek.png", linkedInUrl: "https://linkedin.com" },
+  { name: "David Lee", role: "Business", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
+  { name: "Merek Soriano", role: "Business", imageSrc: "/pfps/merek.png", linkedInUrl: "https://www.linkedin.com/in/merek-soriano-0ba570291/" },
 ];
 
 const developmentTeam = [
-  { name: "Morgan Stuart", role: "NME + Development", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Alex Kozik", role: "AI/ML", imageSrc: "/pfps/alex.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Audrey Lewellen", role: "AI/ML", imageSrc: "/pfps/audrey.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Brandon Xu", role: "Backend", imageSrc: "/pfps/brandon.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Nicole Luo", role: "Backend", imageSrc: "/pfps/nicole.png", linkedInUrl: "https://linkedin.com" },
+  { name: "Morgan Stuart", role: "NME + Development", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://www.linkedin.com/in/morgan-nstuart/" },
+  { name: "Alex Kozik", role: "AI/ML", imageSrc: "/pfps/alex.png", linkedInUrl: "https://www.linkedin.com/in/alex-kozik/" },
+  { name: "Audrey Lewellen", role: "AI/ML", imageSrc: "/pfps/audrey.png", linkedInUrl: "https://www.linkedin.com/in/audrey-lewellen-686823355/" },
+  { name: "Brandon Xu", role: "Backend", imageSrc: "/pfps/brandon.png", linkedInUrl: "https://www.linkedin.com/in/brandon-xu-284748322/" },
+  { name: "Nicole Luo", role: "Backend", imageSrc: "/pfps/nicole.png", linkedInUrl: "https://www.linkedin.com/in/nicoleluo7/" },
 ];
 
 export default function TeamPage() {
