@@ -6,9 +6,12 @@ import { Calendar, MessageSquare, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
 const items: TimelineItemData[] = [
-  { icon: <Calendar className="h-4 w-4" />, title: "Applications Open", date: "Sep 15" },
-  { icon: <MessageSquare className="h-4 w-4" />, title: "Interviews", date: "Oct 01–10" },
-  { icon: <CheckCircle className="h-4 w-4" />, title: "Decisions", date: "Oct 15" },
+  { icon: <Calendar className="h-4 w-4" />, title: "Applications Open", date: "8/26/25" },
+  { icon: <MessageSquare className="h-4 w-4" />, title: "Info Session 1", date: "9/10/25 (6:15pm) @ Gates G01" },
+  { icon: <MessageSquare className="h-4 w-4" />, title: "Info Session 2", date: "9/14/25 (2:00pm) @ Gates G01" },
+  { icon: <MessageSquare className="h-4 w-4" />, title: "Project Submission Deadline", date: "9/15/25 (11:59pm)" },
+  { icon: <MessageSquare className="h-4 w-4" />, title: "Interviews", date: "9/16/-9/22" },
+  { icon: <CheckCircle className="h-4 w-4" />, title: "Decisions", date: "9/23" },
 ];
 
 export default function ApplyPage() {
@@ -18,7 +21,9 @@ export default function ApplyPage() {
         <Container>
           <h1 className="h1">Apply to Cornell Gen AI</h1>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
-            We look for builders who love to ship. All majors and years welcome.
+            Build a superstar project.
+            Show that you can use AI.
+            Join us.
           </p>
 
           <div className="mt-10">
@@ -26,7 +31,7 @@ export default function ApplyPage() {
           </div>
 
           <div className="mt-10">
-            <Link href="https://forms.gle/example" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
+            <Link href="https://docs.google.com/forms/u/1/d/1E5yTo-NvoSspzyLJQ0XyaFozGajN6Z6-9Gdowfq4M0Y" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
               Open Application Form
             </Link>
           </div>

@@ -22,7 +22,7 @@ export default function MemberCard({ name, role, imageSrc, linkedInUrl }: Member
       whileHover={prefersReducedMotion ? {} : { y: -4 }}
       className="group rounded-2xl bg-white/5 backdrop-blur shadow-sm shadow-black/20 overflow-hidden"
     >
-      <div className="relative aspect-[4/3]">
+      <div className="relative aspect-square">
         <Image src={imageSrc} alt={`${name} headshot`} fill sizes="(min-width: 768px) 320px, 100vw" className="object-cover" />
       </div>
       <div className="p-4 md:p-5">

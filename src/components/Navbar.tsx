@@ -14,7 +14,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10">
+    <div className="sticky top-0 z-50 backdrop-blur bg-black/80 border-b border-white/20">
       <Container className="flex items-center justify-between h-16">
         <Link href="/" aria-label="Cornell Gen AI Home" className="font-semibold tracking-tight text-zinc-200">
           Cornell Gen AI
@@ -35,9 +35,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link href="/apply" className={`${linkBase} bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] text-white shadow-md shadow-purple-500/20`}>
-            Apply
-          </Link>
         </nav>
       </Container>
     </div>

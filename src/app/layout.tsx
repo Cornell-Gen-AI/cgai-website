@@ -9,7 +9,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 
 export const metadata: Metadata = {
   title: "Cornell Gen AI",
-  description: "Where students build, innovate, and collaborate with industry partners in real-world AI projects.",
+  description: "Bridging students and industry leaders to build cutting-edge AI tools.",
 };
 
 export default function RootLayout({
