@@ -18,18 +18,25 @@ export default function Timeline({ items }: PropsWithChildren<TimelineProps>) {
         {items.map((item, index) => (
           <li
             key={index}
-            className={`mb-12 ml-8 ${index === items.length - 1 ? '' : ''}`}
+            className={`mb-12 ml-12 ${index === items.length - 1 ? '' : ''}`}
           >
             {/* Timeline dot with ring */}
-            <span className="absolute flex items-center justify-center w-10 h-10 bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] rounded-full -start-5 ring-8 ring-white dark:ring-gray-900">
-              <span className="text-white text-lg" aria-hidden>{item.icon}</span>
+            <span className={`absolute flex items-center justify-center w-12 h-12 rounded-full -start-6 ring-8 ring-white dark:ring-gray-900 ${
+              index === 0 ? 'bg-blue-500' :
+              index === 1 ? 'bg-green-500' :
+              index === 2 ? 'bg-purple-500' :
+              index === 3 ? 'bg-orange-500' :
+              index === 4 ? 'bg-pink-500' :
+              'bg-indigo-500'
+            }`}>
+              <span className="text-white text-2xl" aria-hidden>{item.icon}</span>
             </span>
             
             {/* Content */}
             <h3 className="mb-2 text-xl md:text-2xl font-semibold text-gray-900 dark:text-white">
               {item.title}
             </h3>
-            <time className="block mb-3 text-base md:text-lg font-normal leading-none text-gray-400 dark:text-gray-500">
+            <time className="block mb-3 text-base md:text-lg font-normal leading-none text-gray-300 dark:text-gray-400">
               {item.date}
             </time>
           </li>

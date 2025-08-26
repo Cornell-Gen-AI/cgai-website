@@ -10,6 +10,7 @@ export default function Navbar() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/team", label: "Team" },
+    { href: "/portfolio", label: "Portfolio" },
     { href: "/apply", label: "Apply" },
   ];
 

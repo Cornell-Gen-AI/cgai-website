@@ -32,7 +32,6 @@ export default function Home() {
 
       <Section className="py-8 md:py-10">
         <Container>
-          <h2 className="h2">Partners</h2>
         </Container>
         <div className="mt-6 relative flex w-full flex-col items-center justify-center overflow-hidden">
           <Marquee pauseOnHover className="[--duration:10s]" repeat={6}>
@@ -87,26 +86,38 @@ export default function Home() {
               icon: <BarChart3 className="h-6 w-6" />,
               title: "Innovative AI Projects",
               desc: "Collaborate on impactful projects like AI-driven accessibility tools, educational assistants, and creative applications.",
+              color: "from-blue-600 via-blue-500 to-blue-400",
+              shadow: "shadow-blue-500/20"
             }, {
               icon: <Eye className="h-6 w-6" />,
               title: "Exclusive Speaker Series",
               desc: "Engage with AI startup founders, researchers, and tech leaders for insights into the latest opportunities in the field.",
+              color: "from-purple-600 via-purple-500 to-purple-400",
+              shadow: "shadow-purple-500/20"
             }, {
               icon: <Sparkles className="h-6 w-6" />,
               title: "Real-World Applications",
               desc: "Work on real-world challenges with industry partners, ensuring your projects have tangible outcomes and societal impact.",
+              color: "from-green-600 via-green-500 to-green-400",
+              shadow: "shadow-green-500/20"
             }, {
               icon: <Network className="h-6 w-6" />,
               title: "Networking & Mentorship",
               desc: "Build connections with industry professionals and like-minded peers through exclusive networking events and collaborative opportunities that foster long-term relationships.",
+              color: "from-orange-600 via-orange-500 to-orange-400",
+              shadow: "shadow-orange-500/20"
             }, {
               icon: <Smartphone className="h-6 w-6" />,
               title: "Cutting-Edge Tech",
               desc: "Gain hands-on experience with the latest AI tools and platforms to create innovative solutions. Explore how advanced technologies can be applied to solve real-world challenges.",
+              color: "from-pink-600 via-pink-500 to-pink-400",
+              shadow: "shadow-pink-500/20"
             }, {
               icon: <Leaf className="h-6 w-6" />,
               title: "Career Development",
               desc: "Prepare for the future of AI with personalized career guidance, impactful resume-building projects, access to networking events, and exposure to industry opportunities.",
+              color: "from-teal-600 via-teal-500 to-teal-400",
+              shadow: "shadow-teal-500/20"
             }].map((item) => (
               <div
                 key={item.title}
@@ -116,7 +127,7 @@ export default function Home() {
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                 
                 <div className="relative z-10">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] text-white flex items-center justify-center shadow-md shadow-purple-500/20 p-3">
+                  <div className={`h-14 w-14 rounded-xl bg-gradient-to-r ${item.color} text-white flex items-center justify-center shadow-md ${item.shadow} p-3`}>
                     {item.icon}
                   </div>
                   <h3 className="mt-4 text-lg md:text-xl font-semibold text-zinc-100">{item.title}</h3>
