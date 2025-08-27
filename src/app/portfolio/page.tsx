@@ -58,7 +58,17 @@ export default function PortfolioPage() {
               </div>
               
               <div className="order-1 lg:order-2">
-                <h2 className="text-2xl font-bold text-white mb-4">QuickFi (SP25)</h2>
+                <div className="flex items-center gap-4 mb-4">
+                  <h2 className="text-2xl font-bold text-white">QuickFi (SP25)</h2>
+                  <a
+                    href="https://drive.google.com/file/u/0/d/1Pu6QSW2ClZg3em3bRcolzeS73srP9z-p/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-2xl bg-green-600 px-4 py-2 text-sm text-white shadow-md shadow-green-500/20 hover:bg-green-500 hover:shadow-lg hover:shadow-green-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+                  >
+                    View Blog
+                  </a>
+                </div>
                 <p className="text-zinc-300 leading-relaxed">
                   CGAI has worked with QuickFi on the following projects:
                 </p>

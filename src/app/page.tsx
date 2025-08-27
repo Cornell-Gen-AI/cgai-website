@@ -40,7 +40,7 @@ export default function Home() {
               Generative AI @ Cornell
             </h1>
             <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
-              Bridging students and industry leaders to build cutting-edge AI tools.
+              Bridging builders, researchers, and industry leaders to explore the frontier of intelligent systems. Join us to develop cutting-edge AI tooling and learn with a community that ships.
             </p>
             <div className="mt-6 md:mt-8">
               <Link href="/apply" className="inline-flex items-center rounded-2xl bg-red-600 px-5 py-3 text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
@@ -52,6 +52,9 @@ export default function Home() {
 
                 {/* Partners section - bottom portion */}
         <Container>
+          <div className="text-center mb-6">
+            <p className="text-base text-zinc-300 font-medium">Our Partners</p>
+          </div>
           <div className="py-7 relative flex flex-col items-center justify-center overflow-hidden">
             {/* Background blobs for marquee contrast */}
             <div aria-hidden className="pointer-events-none absolute inset-0">
