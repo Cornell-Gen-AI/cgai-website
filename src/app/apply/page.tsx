@@ -32,22 +32,25 @@ export default function ApplyPage() {
             </div>
             
             <div className="space-y-8">
-              <div>
-                <Link href="https://docs.google.com/forms/u/1/d/1E5yTo-NvoSspzyLJQ0XyaFozGajN6Z6-9Gdowfq4M0Y" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGj9KCqA4_iu4gMfV97mGATUtohsvN2yY3JbgpjH45ZTsX8A/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30 hover:bg-red-700 hover:shadow-xl hover:shadow-red-500/40 hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
                   Open Application Form
+                </Link>
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfWeNJ32lSA8jg-X1cBjJsSkinwIv0jX7tiE9ruvhOJJxyzdA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
+                  Coffee Chat
                 </Link>
               </div>
 
               <div className="space-y-4">
                 {[{
-                  q: "Who should apply?",
-                  a: "Curious builders who like autonomy, fast iteration, and shipping.",
-                }, {
-                  q: "What time commitment?",
-                  a: "About 6–8 hours per week, including team meetings and build time.",
-                }, {
-                  q: "Do I need prior AI experience?",
-                  a: "No. We value product sense and execution. You'll learn on the job.",
+                  q: "What do you look for in a new member?",
+                  a: "The most important trait is drive and ambition. We want to know that you can get things done no matter the challenge. Second most important is the depth of your technical experience. Thirdly, we want people that we can vibe (and vibecode) with.",
+                },{
+                  q: "What do I submit?", 
+                  a: "We want to see your skills put to the test in building and shipping a real AI application. You have 3 weeks either solo or with 1-2 teammates. We'll evaluate based on technical sophistication, innovation, and implementation quality. Any idea goes, so choose something cool that excites you.",
+                },  {
+                  q: "What will the work environment look like?",
+                  a: "You'll be part of a small, agile team working quickly on specific client projects. We focus on delivering real solutions for companies that have hired us to solve their problems.",
                 }].map((f) => (
                   <div key={f.q} className="rounded-2xl bg-white/5 backdrop-blur p-6 shadow-sm shadow-black/20">
                     <h3 className="text-lg md:text-xl font-semibold text-zinc-100">{f.q}</h3>
