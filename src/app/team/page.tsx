@@ -10,12 +10,11 @@ const executiveBoard = [
   { name: "Mahdi Choudhury", role: "Treasurer", imageSrc: "/pfps/mahdi.png", linkedInUrl: "https://www.linkedin.com/in/mahdi-choudhury-h/" },
   { name: "Akul Maheshwari", role: "DEI Chair", imageSrc: "/pfps/akul.png", linkedInUrl: "https://www.linkedin.com/in/akul-maheshwari/" },
   { name: "Morgan Stuart", role: "NME + Development", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://www.linkedin.com/in/morgan-nstuart/" },
-];
-
-const businessTeam = [
   { name: "David Lee", role: "Business Lead", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
   { name: "Merek Soriano", role: "Business Lead", imageSrc: "/pfps/merek.png", linkedInUrl: "https://www.linkedin.com/in/merek-soriano-0ba570291/" },
 ];
+
+// Removed businessTeam; merged into executiveBoard
 
 const developmentTeam = [
   { name: "Alex Kozik", role: "AI/ML", imageSrc: "/pfps/alex.png", linkedInUrl: "https://www.linkedin.com/in/alex-kozik/" },
@@ -54,15 +53,7 @@ export default function TeamPage() {
             </div>
                     </div>
 
-          {/* Business Team */}
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-white mb-8">Business</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
-              {businessTeam.map((m) => (
-                <MemberCard key={m.name} {...m} />
-              ))}
-            </div>
-          </div>
+          {/* Removed Business Team section */}
 
  
 
