@@ -39,7 +39,7 @@ export default function Home() {
               <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto" />
               Generative AI @ Cornell
             </h1>
-            <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
+            <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl text-center sm:text-left">
               Bridging builders, researchers, and industry leaders to explore the frontier of intelligent systems. Join us to develop cutting-edge AI tooling and learn with a community that ships.
             </p>
             <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 items-center sm:items-start">
