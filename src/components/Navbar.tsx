@@ -17,9 +17,9 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 backdrop-blur bg-black/80 border-b border-white/20">
       <Container className="flex items-center justify-between h-16">
-        <Link href="/" aria-label="Cornell Gen AI Home" className="font-semibold tracking-tight text-zinc-200 flex items-center gap-2">
+        <Link href="/" aria-label="Generative AI @ Cornell Home" className="font-semibold tracking-tight text-zinc-200 flex items-center gap-2 text-lg">
           <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-8 w-auto" />
-          Cornell Gen AI
+          Generative AI @ Cornell
         </Link>
         <nav className="flex items-center gap-2 md:gap-4">
           {navItems.map((item) => {

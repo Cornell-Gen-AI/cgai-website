@@ -19,7 +19,7 @@ export default function ApplyPage() {
     <div>
       <Section>
         <Container>
-          <h1 className="h1">Apply to Cornell Gen AI</h1>
+          <h1 className="h1">Apply to Generative AI @ Cornell</h1>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
             Build a superstar project.
             Show that you can use AI.

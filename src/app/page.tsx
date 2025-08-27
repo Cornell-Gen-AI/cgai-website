@@ -37,7 +37,7 @@ export default function Home() {
           <div className="py-8 md:py-10 lg:py-12">
             <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4">
               <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto" />
-              Cornell Gen AI
+              Generative AI @ Cornell
             </h1>
             <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
               Bridging students and industry leaders to build cutting-edge AI tools.
@@ -109,7 +109,7 @@ export default function Home() {
           <div>
             <h2 className="h2">Our Mission</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
-              Cornell Gen AI is a student-run club building startup-style, autonomous AI projects with real industry collaboration. 
+              Generative AI @ Cornell is a student-run club building startup-style, autonomous AI projects with real industry collaboration. 
             </p>
             <p className="mt-3 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
               Members work in small, autonomous teams with mentorship from experienced builders and partners, gaining hands-on experience that translates directly to impactful careers and ventures.
@@ -126,7 +126,7 @@ export default function Home() {
           <div>
             <h2 className="h2">What We Offer</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
-              Join Cornell Gen AI to access exclusive opportunities, cutting-edge technology, and a network of innovators.
+              Join Generative AI @ Cornell to access exclusive opportunities, cutting-edge technology, and a network of innovators.
             </p>
           </div>
 
