@@ -6,6 +6,7 @@ import Section from "../components/Section";
 import { Rocket, Briefcase, Wrench, BarChart3, Eye, Sparkles, Network, Smartphone, Leaf } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/magicui/marquee";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 export default function Home() {
   return (
@@ -89,8 +90,18 @@ export default function Home() {
 </Container>
       </Section>
 
-      <Section className="py-8 md:py-10">
-        <Container>
+      <Section className="py-8 md:py-10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <FlickeringGrid 
+            squareSize={20}
+            gridGap={16}
+            flickerChance={0.2}
+            color="rgb(91, 157, 255)"
+            maxOpacity={0.15}
+            className="opacity-50"
+          />
+        </div>
+        <Container className="relative z-10">
           <div>
             <h2 className="h2">Our Mission</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">
@@ -100,8 +111,6 @@ export default function Home() {
               Members work in small, autonomous teams with mentorship from experienced builders and partners, gaining hands-on experience that translates directly to impactful careers and ventures.
             </p>
           </div>
-
-
         </Container>
       </Section>
 
