@@ -42,11 +42,11 @@ export default function Home() {
             <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
               Bridging builders, researchers, and industry leaders to explore the frontier of intelligent systems. Join us to develop cutting-edge AI tooling and learn with a community that ships.
             </p>
-            <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4">
-              <Link href="/apply" className="inline-flex items-center rounded-2xl bg-red-600 px-5 py-3 text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
+            <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 items-center sm:items-start">
+              <Link href="/apply" className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-8 py-3 text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 min-w-[200px] sm:min-w-0">
                 Apply now
               </Link>
-              <Link href="/portfolio" className="inline-flex items-center rounded-2xl bg-white/10 backdrop-blur-sm px-5 py-3 text-white border border-white/20 shadow-md shadow-black/20 hover:bg-white/20 hover:shadow-lg hover:shadow-black/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+              <Link href="/portfolio" className="inline-flex items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm px-8 py-3 text-white border border-white/20 shadow-md shadow-black/20 hover:bg-white/20 hover:shadow-lg hover:shadow-black/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 min-w-[200px] sm:min-w-0">
                 Explore Initiatives
               </Link>
             </div>
