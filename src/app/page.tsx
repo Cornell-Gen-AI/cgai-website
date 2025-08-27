@@ -35,12 +35,15 @@ export default function Home() {
         {/* Hero content - top portion */}
         <Container className="flex-1 flex items-center">
           <div className="py-8 md:py-10 lg:py-12">
-            <h1 className="h1 font-semibold tracking-tight text-white">Cornell Gen AI</h1>
+            <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4">
+              <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto" />
+              Cornell Gen AI
+            </h1>
             <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
               Bridging students and industry leaders to build cutting-edge AI tools.
             </p>
             <div className="mt-6 md:mt-8">
-              <Link href="/apply" className="inline-flex items-center rounded-2xl bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff] px-5 py-3 text-white shadow-md shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400">
+              <Link href="/apply" className="inline-flex items-center rounded-2xl bg-red-600 px-5 py-3 text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
                 Apply now
               </Link>
             </div>
@@ -66,12 +69,13 @@ export default function Home() {
                
               "
             >
-      <Marquee pauseOnHover className="[--duration:10s]" repeat={2}>
+      <Marquee pauseOnHover className="[--duration:15s]" repeat={2}>
         {[
           { src: "/chartercommunications.png", alt: "Charter Communications" },
           { src: "/vero.webp", alt: "Vero" },
           { src: "/quickfi-logo-01-1.png", alt: "QuickFi" },
           { src: "/cisco.png", alt: "Cisco" },
+          { src: "/gradial.jpeg", alt: "Gradial" },
         ].map((logo) => (
           <div
             key={logo.alt}
@@ -80,7 +84,7 @@ export default function Home() {
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-20 w-auto object-contain"
+              className="h-20 w-auto object-contain rounded-lg"
             />
           </div>
         ))}
@@ -114,8 +118,11 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section className="py-8 md:py-10">
-        <Container>
+      <Section className="py-8 md:py-10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-purple-900/30 to-transparent"></div>
+        </div>
+        <Container className="relative z-10">
           <div>
             <h2 className="h2">What We Offer</h2>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-3xl">

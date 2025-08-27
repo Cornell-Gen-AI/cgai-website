@@ -33,10 +33,10 @@ export default function ApplyPage() {
             
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGj9KCqA4_iu4gMfV97mGATUtohsvN2yY3JbgpjH45ZTsX8A/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30 hover:bg-red-700 hover:shadow-xl hover:shadow-red-500/40 hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGj9KCqA4_iu4gMfV97mGATUtohsvN2yY3JbgpjH45ZTsX8A/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
                   Open Application Form
                 </Link>
-                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfWeNJ32lSA8jg-X1cBjJsSkinwIv0jX7tiE9ruvhOJJxyzdA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfWeNJ32lSA8jg-X1cBjJsSkinwIv0jX7tiE9ruvhOJJxyzdA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30 hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
                   Coffee Chat
                 </Link>
               </div>
