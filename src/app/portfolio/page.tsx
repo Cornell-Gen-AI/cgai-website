@@ -15,7 +15,7 @@ export default function PortfolioPage() {
           
           {/* ClassGPT Project */}
           <div className="mt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">ClassGPT (SP25)</h2>
                 <p className="text-zinc-300 leading-relaxed">
@@ -26,8 +26,8 @@ export default function PortfolioPage() {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-green-500/20 rounded-2xl blur-xl"></div>
-                <div className="relative bg-zinc-800/50 backdrop-blur-sm rounded-2xl p-8 border border-zinc-700/50">
-                  <div className="w-full h-64 relative">
+                <div className="relative bg-zinc-800/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 lg:p-8 border border-zinc-700/50">
+                  <div className="w-full h-48 md:h-56 lg:h-64 relative">
                     <Image
                       src="/classgpt.png"
                       alt="ClassGPT Logo"
@@ -42,11 +42,11 @@ export default function PortfolioPage() {
 
           {/* QuickFi Project */}
           <div className="mt-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+              <div className="relative order-2 lg:order-1">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-400/30 to-blue-400/30 rounded-2xl blur-xl"></div>
-                <div className="relative bg-zinc-700/30 backdrop-blur-sm rounded-2xl p-8 border border-zinc-600/40">
-                  <div className="w-full h-64 relative">
+                <div className="relative bg-zinc-700/30 backdrop-blur-sm rounded-2xl p-4 md:p-6 lg:p-8 border border-zinc-600/40">
+                  <div className="w-full h-48 md:h-56 lg:h-64 relative">
                     <Image
                       src="/quickfi-logo-01-1.png"
                       alt="QuickFi Logo"
@@ -57,7 +57,7 @@ export default function PortfolioPage() {
                 </div>
               </div>
               
-              <div>
+              <div className="order-1 lg:order-2">
                 <h2 className="text-2xl font-bold text-white mb-4">QuickFi (SP25)</h2>
                 <p className="text-zinc-300 leading-relaxed">
                   CGAI has worked with QuickFi on the following projects:
