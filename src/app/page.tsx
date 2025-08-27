@@ -54,11 +54,11 @@ export default function Home() {
         </Container>
 
                 {/* Partners section - bottom portion */}
-        <Container>
-          <div className="text-center mb-6">
+        <div className="w-full">
+          <div className="text-center mb-6 px-6 md:px-8">
             <p className="text-base text-zinc-300 font-medium">Our Partners</p>
           </div>
-          <div className="py-7 relative flex flex-col items-center justify-center overflow-hidden">
+          <div className="py-7 relative flex flex-col items-center justify-center overflow-hidden w-full">
             {/* Background blobs for marquee contrast */}
             <div aria-hidden className="pointer-events-none absolute inset-0">
               <div className="absolute top-1/2 left-1/4 h-[200px] w-[200px] rounded-full blur-3xl opacity-25 bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff]"></div>
@@ -68,14 +68,15 @@ export default function Home() {
             </div>
             <div
               className="
-                w-full
+                md:w-3/4 mx-auto
+                sm:w-full
                 [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_80%,transparent_100%)]
                 [mask-repeat:no-repeat]
                 [mask-size:100%_100%]
                
               "
             >
-      <Marquee pauseOnHover className="[--duration:15s]" repeat={2}>
+      <Marquee pauseOnHover className="[--duration:15s] w-full">
         {[
           { src: "/chartercommunications.png", alt: "Charter Communications" },
           { src: "/vero.webp", alt: "Vero" },
@@ -85,19 +86,19 @@ export default function Home() {
         ].map((logo) => (
           <div
             key={logo.alt}
-            className="flex items-center justify-center mx-7"
+            className="flex items-center justify-center mx-4 sm:mx-7 min-w-fit"
           >
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-20 w-auto object-contain rounded-lg"
+              className="h-16 sm:h-20 w-auto object-contain rounded-lg"
             />
           </div>
         ))}
       </Marquee>
     </div>
   </div>
-</Container>
+</div>
       </Section>
 
       <Section className="py-8 md:py-10 relative overflow-hidden">
