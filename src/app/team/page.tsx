@@ -21,6 +21,8 @@ const developmentTeam = [
   { name: "Audrey Lewellen", role: "AI/ML", imageSrc: "/pfps/audrey.png", linkedInUrl: "https://www.linkedin.com/in/audrey-lewellen-686823355/" },
   { name: "Brandon Xu", role: "Backend", imageSrc: "/pfps/brandon.png", linkedInUrl: "https://www.linkedin.com/in/brandon-xu-284748322/" },
   { name: "Nicole Luo", role: "Backend", imageSrc: "/pfps/nicole.png", linkedInUrl: "https://www.linkedin.com/in/nicoleluo7/" },
+   { name: "Zach Riff", role: "Backend", imageSrc: "/pfps/zach.png", linkedInUrl: "https://www.linkedin.com/in/zach-riiff-828018325/" },
+    { name: "Arshdeep Kaur", role: "Backend", imageSrc: "/pfps/arshdeep.png", linkedInUrl: "https://www.linkedin.com/in/arshdeepkaur13/" },
 ];
 
 export default function TeamPage() {
