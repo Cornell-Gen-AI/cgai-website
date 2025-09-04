@@ -7,14 +7,16 @@ import Link from "next/link";
 const executiveBoard = [
   { name: "Daniel Sachs", role: "Founding President", imageSrc: "/pfps/daniel.png", linkedInUrl: "https://www.linkedin.com/in/daniel-m-sachs/" },
   { name: "Erik Pedersen", role: "Vice-President", imageSrc: "/pfps/erik.png", linkedInUrl: "https://linkedin.com" },
-  { name: "Mahdi Choudhury", role: "Treasurer", imageSrc: "/pfps/mahdi.png", linkedInUrl: "https://www.linkedin.com/in/mahdi-choudhury-h/" },
-  { name: "Akul Maheshwari", role: "DEI Chair", imageSrc: "/pfps/akul.png", linkedInUrl: "https://www.linkedin.com/in/akul-maheshwari/" },
-  { name: "Morgan Stuart", role: "NME + Development", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://www.linkedin.com/in/morgan-nstuart/" },
-  { name: "David Lee", role: "Business Lead", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
-  { name: "Merek Soriano", role: "Business Lead", imageSrc: "/pfps/merek.png", linkedInUrl: "https://www.linkedin.com/in/merek-soriano-0ba570291/" },
+  { name: "Morgan Stuart", role: "Lead Engineer + NME Chair", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://www.linkedin.com/in/morgan-nstuart/" },
+   { name: "Merek Soriano", role: "Head of Corporate Partnership", imageSrc: "/pfps/merek.png", linkedInUrl: "https://www.linkedin.com/in/merek-soriano-0ba570291/" },
+  { name: "David Lee", role: "Head of Product", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
+ 
 ];
 
-// Removed businessTeam; merged into executiveBoard
+const administrationTeam = [
+  { name: "Mahdi Choudhury", role: "Treasurer", imageSrc: "/pfps/mahdi.png", linkedInUrl: "https://www.linkedin.com/in/mahdi-choudhury-h/" },
+  { name: "Akul Maheshwari", role: "DEI Chair", imageSrc: "/pfps/akul.png", linkedInUrl: "https://www.linkedin.com/in/akul-maheshwari/" },
+];
 
 const developmentTeam = [
   { name: "Alex Kozik", role: "AI/ML", imageSrc: "/pfps/alex.png", linkedInUrl: "https://www.linkedin.com/in/alex-kozik/" },
@@ -53,11 +55,7 @@ export default function TeamPage() {
                 <MemberCard key={m.name} {...m} />
               ))}
             </div>
-                    </div>
-
-          {/* Removed Business Team section */}
-
- 
+          </div>
 
           {/* Development Team */}
           <div className="mt-16">
@@ -68,6 +66,17 @@ export default function TeamPage() {
               ))}
             </div>
           </div>
+
+          {/* Administration Team */}
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-white mb-8">Administration</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+              {administrationTeam.map((m) => (
+                <MemberCard key={m.name} {...m} />
+              ))}
+            </div>
+          </div>
+
         </Container>
       </Section>
     </div>
