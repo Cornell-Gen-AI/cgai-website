@@ -4,11 +4,11 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-white/5">
       <Container className="py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-400">
-        <p className="text-sm md:text-base">© {new Date().getFullYear()} Generative AI @ Cornell</p>
-        <div className="flex items-center gap-6">
-          <div className="text-sm md:text-base">
-            Built by students at Cornell. <span className="text-zinc-500">Autonomous projects. Real impact.</span>
-          </div>
+        <div className="text-sm md:text-base">
+          This organization is a registered student organization of Cornell University &bull; <a href="https://hr.cornell.edu/about/workplace-rights/equal-education-and-employment" className="text-zinc-500 hover:text-white transition-colors duration-200">Equal Education and Employment</a>
+        </div>
+        <div className="flex items-center gap-4">
+          <p className="text-sm md:text-base">© {new Date().getFullYear()} Cornell Gen AI</p>
           <div className="flex items-center gap-4">
             {/* LinkedIn Icon */}
             <a
