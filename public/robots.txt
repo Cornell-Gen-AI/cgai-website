@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://cornellgenai.com
+
+# Sitemaps
+Sitemap: https://cornellgenai.com/sitemap.xml
