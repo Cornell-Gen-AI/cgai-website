@@ -9,9 +9,9 @@ const items: TimelineItemData[] = [
   { icon: <Calendar className="h-6 w-6" />, title: "Applications Open", date: "8/26/25" },
   { icon: <Users className="h-6 w-6" />, title: "Info Session 1", date: "9/10/25 (6:15pm) @ Gates G01" },
   { icon: <Users className="h-6 w-6" />, title: "Info Session 2", date: "9/14/25 (2:00pm) @ Gates G01" },
-  { icon: <FileText className="h-6 w-6" />, title: "Project Submission Deadline", date: "9/15/25 (11:59pm)" },
-  { icon: <MessageSquare className="h-6 w-6" />, title: "Interviews", date: "9/16/-9/22" },
-  { icon: <CheckCircle className="h-6 w-6" />, title: "Decisions", date: "9/23" },
+  { icon: <FileText className="h-6 w-6" />, title: "Project Submission Deadline", date: "9/20/25 (11:59pm)" },
+  { icon: <MessageSquare className="h-6 w-6" />, title: "Interviews", date: "9/21/-9/24" },
+  { icon: <CheckCircle className="h-6 w-6" />, title: "Decisions", date: "9/25" },
 ];
 
 export default function ApplyPage() {
