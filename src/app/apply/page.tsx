@@ -6,12 +6,12 @@ import { Calendar, Users, FileText, Clock, MessageSquare, CheckCircle } from "lu
 import Link from "next/link";
 
 const items: TimelineItemData[] = [
-  { icon: <Calendar className="h-6 w-6" />, title: "Applications Open", date: "8/26/25" },
-  { icon: <Users className="h-6 w-6" />, title: "Info Session 1", date: "9/10/25 (6:15pm) @ Gates G01" },
-  { icon: <Users className="h-6 w-6" />, title: "Info Session 2", date: "9/14/25 (2:00pm) @ Gates G01" },
-  { icon: <FileText className="h-6 w-6" />, title: "Project Submission Deadline", date: "9/20/25 (11:59pm)" },
-  { icon: <MessageSquare className="h-6 w-6" />, title: "Interviews", date: "9/21/-9/24" },
-  { icon: <CheckCircle className="h-6 w-6" />, title: "Decisions", date: "9/25" },
+  { icon: <Calendar className="h-6 w-6" />, title: "Applications Open", date: "1/26/26" },
+  { icon: <Users className="h-6 w-6" />, title: "Info Session 1", date: "TBD..." },
+  { icon: <Users className="h-6 w-6" />, title: "Info Session 2", date: "TBD..." },
+  { icon: <FileText className="h-6 w-6" />, title: "Project Submission Deadline", date: "TBD..." },
+  { icon: <MessageSquare className="h-6 w-6" />, title: "Interviews", date: "TBD..." },
+  { icon: <CheckCircle className="h-6 w-6" />, title: "Decisions", date: "TBD..." },
 ];
 
 export default function ApplyPage() {
@@ -21,9 +21,10 @@ export default function ApplyPage() {
         <Container>
           <h1 className="h1">Apply to Generative AI @ Cornell</h1>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
-            Build a superstar project.
+            <div className="apply-strikeout"> Build a superstar project.
             Show that you can use AI.
-            Join us.
+            Join us.</div>
+            We are currently not in the recruitment season. Check back in around the time of SP 26' instruction start.
           </p>
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
@@ -34,7 +35,7 @@ export default function ApplyPage() {
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGj9KCqA4_iu4gMfV97mGATUtohsvN2yY3JbgpjH45ZTsX8A/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
-                  Open Application Form
+                  <div className="apply-strikeout">Open Application Form</div>
                 </Link>
                 <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfWeNJ32lSA8jg-X1cBjJsSkinwIv0jX7tiE9ruvhOJJxyzdA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30 hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
                   Coffee Chat
