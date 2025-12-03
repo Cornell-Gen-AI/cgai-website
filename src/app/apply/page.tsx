@@ -3,7 +3,6 @@ import Container from "../../components/Container";
 import Section from "../../components/Section";
 import Timeline, { TimelineItemData } from "../../components/Timeline";
 import { Calendar, Users, FileText, Clock, MessageSquare, CheckCircle } from "lucide-react";
-import Link from "next/link";
 
 const items: TimelineItemData[] = [
   { icon: <Calendar className="h-6 w-6" />, title: "Applications Open", date: "1/26/26" },
@@ -34,12 +33,12 @@ export default function ApplyPage() {
             
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGj9KCqA4_iu4gMfV97mGATUtohsvN2yY3JbgpjH45ZTsX8A/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
+                <div className="inline-flex items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-semibold shadow-lg shadow-red-500/30">
                   <div className="apply-strikeout">Open Application Form</div>
-                </Link>
-                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSfWeNJ32lSA8jg-X1cBjJsSkinwIv0jX7tiE9ruvhOJJxyzdA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30 hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400">
+                </div>
+                <div className="inline-flex items-center rounded-2xl bg-orange-500 px-6 py-4 text-white font-semibold shadow-lg shadow-orange-500/30">
                   Coffee Chat
-                </Link>
+                </div>
               </div>
 
               <div className="space-y-4">

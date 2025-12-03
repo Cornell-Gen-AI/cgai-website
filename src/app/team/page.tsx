@@ -40,8 +40,6 @@ const developmentTeam = [
   { name: "Zahrizhal Ali, Jr", role: "QuickFi", year: 5, imageSrc: "/pfps/blank_profile.webp", linkedInUrl: "" },
   // Vero
   { name: "Dhruv Mandalik", role: "Vero", year: 1, imageSrc: "/pfps/blank_profile.webp", linkedInUrl: "" },
-  { name: "Zach Riiff", role: "Vero", year: 2, imageSrc: "/pfps/zach.png", linkedInUrl: "https://www.linkedin.com/in/zach-riiff-828018325/" },
-  { name: "Alex Kozik", role: "Vero", year: 4, imageSrc: "/pfps/alex.png", linkedInUrl: "https://www.linkedin.com/in/alex-kozik/" },
   { name: "Rei Meguro", role: "Vero", year: 5, imageSrc: "/pfps/blank_profile.webp", linkedInUrl: "" },
   // Bridge
   { name: "Yashnil Saha", role: "Bridge", year: 1, imageSrc: "/pfps/blank_profile.webp", linkedInUrl: "" },
