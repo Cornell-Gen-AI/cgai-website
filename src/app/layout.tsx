@@ -21,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[#0b0d12] text-zinc-200`}
+        suppressHydrationWarning
       >
         <Navbar />
         <main>{children}</main>

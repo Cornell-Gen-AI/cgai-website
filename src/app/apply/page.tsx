@@ -19,12 +19,12 @@ export default function ApplyPage() {
       <Section>
         <Container>
           <h1 className="h1">Apply to Generative AI @ Cornell</h1>
-          <p className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
+          <div className="mt-4 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl">
             <div className="apply-strikeout"> Build a superstar project.
             Show that you can use AI.
             Join us.</div>
             We are currently not in the recruitment season. Check back in around the time of SP 26' instruction start.
-          </p>
+          </div>
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
