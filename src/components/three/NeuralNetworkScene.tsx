@@ -244,6 +244,16 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
     setMounted(true);
     setPerformanceConfig(initialConfig);
     
+    // Log performance tier on mount
+    console.log(`[3D Background] Performance Tier: ${initialConfig.tier.toUpperCase()}`);
+    console.log(`[3D Background] Config:`, {
+      nodeCount: initialConfig.nodeCount,
+      maxConnections: initialConfig.maxConnectionsPerNode,
+      bloomEnabled: initialConfig.enableBloom,
+      bloomIntensity: initialConfig.bloomIntensity,
+      pixelRatio: initialConfig.dpr,
+    });
+    
     // Decide whether to use offscreen canvas
     // Only use if explicitly requested or if device supports it and is high-tier
     const shouldUseOffscreen = useOffscreen ?? (
@@ -251,7 +261,17 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
       initialConfig.tier === "high"
     );
     setUseWorker(shouldUseOffscreen);
-  }, [initialConfig, useOffscreen]);
+    
+    if (shouldUseOffscreen) {
+      console.log(`[3D Background] Rendering mode: OFFSCREEN CANVAS (Web Worker)`);
+    } else {
+      console.log(`[3D Background] Rendering mode: MAIN THREAD (React Three Fiber)`);
+    }
+    
+    if (reducedMotion) {
+      console.log(`[3D Background] Reduced motion preference detected - animations disabled`);
+    }
+  }, [initialConfig, useOffscreen, reducedMotion]);
 
   // Handle dynamic downgrade when FPS is too low
   const handleDowngrade = useCallback(() => {
@@ -260,12 +280,14 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
       
       // If already on low, fall back to 2D
       if (prev.tier === "low") {
+        console.log(`[3D Background] Performance degradation detected - falling back to 2D gradient`);
         setForceFallback(true);
         return prev;
       }
       
       // Downgrade to next lower tier
       if (prev.tier === "high") {
+        console.log(`[3D Background] Performance downgrade: HIGH -> MEDIUM`);
         return {
           ...prev,
           tier: "medium" as const,
@@ -279,6 +301,7 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
       }
       
       // Medium -> Low
+      console.log(`[3D Background] Performance downgrade: MEDIUM -> LOW`);
       return {
         ...prev,
         tier: "low" as const,
@@ -295,6 +318,7 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
 
   // Handle worker failure - fall back to main thread
   const handleWorkerFallback = useCallback(() => {
+    console.log(`[3D Background] OffscreenCanvas Worker failed - falling back to main thread rendering`);
     setWorkerFailed(true);
     setUseWorker(false);
   }, []);
@@ -306,6 +330,9 @@ export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetwo
 
   // Mobile or forced fallback (when 3D is too slow even at lowest settings)
   if (isMobile || forceFallback) {
+    if (isMobile && mounted) {
+      console.log(`[3D Background] Mobile device detected - using 2D gradient fallback`);
+    }
     return <FallbackBackground />;
   }
 
