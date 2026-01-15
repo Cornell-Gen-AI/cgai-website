@@ -4,8 +4,9 @@ import { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { usePerformanceTier, PerformanceConfig } from "@/hooks/usePerformanceTier";
 import { useNodeNetwork } from "./useNodeNetwork";
-import { NodeCloud } from "./NodeCloud";
+import { NodeCloudBillboard } from "./NodeCloudBillboard";
 import { ConnectionLines } from "./ConnectionLines";
 import { AnimatedCamera } from "./AnimatedCamera";
 
@@ -35,14 +36,14 @@ function FallbackBackground() {
 }
 
 // Inner 3D scene component (needs to be inside Canvas)
-function Scene() {
+function Scene({ config }: { config: PerformanceConfig }) {
   const network = useNodeNetwork({
-    nodeCount: 400,
+    nodeCount: config.nodeCount,
     brainWidth: 20,
     brainHeight: 15,
     brainDepth: 25,
-    connectionThreshold: 9,
-    maxConnectionsPerNode: 4,
+    connectionThreshold: config.connectionThreshold,
+    maxConnectionsPerNode: config.maxConnectionsPerNode,
   });
 
   return (
@@ -54,18 +55,27 @@ function Scene() {
         verticalAmount={2}
       />
       
-      <NodeCloud network={network} pulseSpeed={0.4} baseSize={0.08} />
-      <ConnectionLines network={network} pulseSpeed={0.5} baseOpacity={0.18} curveSegments={4} pulseSize={0.08} />
+      {/* Use 2D billboard nodes for better performance */}
+      <NodeCloudBillboard network={network} pulseSpeed={0.4} baseSize={0.08} />
+      <ConnectionLines 
+        network={network} 
+        pulseSpeed={config.pulseSpeed} 
+        baseOpacity={0.18} 
+        curveSegments={config.curveSegments} 
+        pulseSize={0.08} 
+      />
 
-      {/* Post-processing for subtle organic glow - simplified for performance */}
-      <EffectComposer multisampling={0}>
-        <Bloom
-          intensity={0.7}
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.9}
-          mipmapBlur
-        />
-      </EffectComposer>
+      {/* Post-processing for subtle organic glow - conditional based on performance tier */}
+      {config.enableBloom && (
+        <EffectComposer multisampling={0}>
+          <Bloom
+            intensity={config.bloomIntensity}
+            luminanceThreshold={0.2}
+            luminanceSmoothing={0.9}
+            mipmapBlur
+          />
+        </EffectComposer>
+      )}
     </>
   );
 }
@@ -76,6 +86,7 @@ export interface NeuralNetworkSceneProps {
 
 export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) {
   const isMobile = useIsMobile();
+  const performanceConfig = usePerformanceTier();
   const [mounted, setMounted] = useState(false);
 
   // Handle hydration mismatch by only rendering after mount
@@ -93,11 +104,11 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
     return <FallbackBackground />;
   }
 
-  // Desktop 3D scene
+  // Desktop 3D scene with adaptive performance
   return (
     <div className={`h-full w-full ${className}`}>
       <Canvas
-        dpr={1}
+        dpr={performanceConfig.dpr}
         gl={{
           antialias: false,
           alpha: true,
@@ -115,7 +126,7 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
-          <Scene />
+          <Scene config={performanceConfig} />
         </Suspense>
       </Canvas>
     </div>
