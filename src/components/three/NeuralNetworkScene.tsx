@@ -12,6 +12,12 @@ import { ConnectionLinesOptimized } from "./ConnectionLinesOptimized";
 import { AnimatedCamera } from "./AnimatedCamera";
 import { useFrameRateMonitor } from "@/hooks/useFrameRateMonitor";
 
+// Check if OffscreenCanvas is supported
+function supportsOffscreenCanvas(): boolean {
+  if (typeof window === "undefined") return false;
+  return typeof OffscreenCanvas !== "undefined" && typeof Worker !== "undefined";
+}
+
 // Fallback 2D background for mobile (matching existing site design)
 function FallbackBackground() {
   return (
@@ -105,16 +111,130 @@ function Scene({ config, reducedMotion, onDowngrade }: SceneProps) {
   );
 }
 
-export interface NeuralNetworkSceneProps {
-  className?: string;
+// Offscreen Canvas Worker-based renderer
+interface OffscreenRendererProps {
+  config: PerformanceConfig;
+  reducedMotion: boolean;
+  onFallback: () => void;
 }
 
-export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) {
+function OffscreenRenderer({ config, reducedMotion, onFallback }: OffscreenRendererProps) {
+  const canvasRef = useState<HTMLCanvasElement | null>(null);
+  const workerRef = useState<Worker | null>(null);
+  const [canvasEl, setCanvasEl] = canvasRef;
+  const [worker, setWorker] = workerRef;
+
+  useEffect(() => {
+    if (!canvasEl) return;
+
+    const rect = canvasEl.getBoundingClientRect();
+    const width = rect.width || window.innerWidth;
+    const height = rect.height || window.innerHeight;
+
+    let offscreen: OffscreenCanvas;
+    try {
+      offscreen = canvasEl.transferControlToOffscreen();
+    } catch {
+      // Canvas already transferred or error - fall back to main thread
+      onFallback();
+      return;
+    }
+
+    // Create worker
+    let newWorker: Worker;
+    try {
+      newWorker = new Worker(
+        new URL("./NeuralNetworkWorker.worker.ts", import.meta.url),
+        { type: "module" }
+      );
+    } catch {
+      // Worker creation failed - fall back to main thread
+      onFallback();
+      return;
+    }
+
+    setWorker(newWorker);
+
+    // Send initialization
+    newWorker.postMessage(
+      {
+        type: "init",
+        canvas: offscreen,
+        width,
+        height,
+        dpr: config.dpr,
+        config: {
+          nodeCount: config.nodeCount,
+          maxConnectionsPerNode: config.maxConnectionsPerNode,
+          connectionThreshold: config.connectionThreshold,
+          bloomEnabled: config.enableBloom,
+          bloomIntensity: config.bloomIntensity,
+          pulseSpeed: config.pulseSpeed,
+          reducedMotion,
+        },
+      },
+      [offscreen]
+    );
+
+    // Handle resize
+    const handleResize = () => {
+      const rect = canvasEl.getBoundingClientRect();
+      newWorker.postMessage({
+        type: "resize",
+        width: rect.width || window.innerWidth,
+        height: rect.height || window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      newWorker.terminate();
+      setWorker(null);
+    };
+  }, [canvasEl, config, reducedMotion, onFallback, setWorker]);
+
+  // Update config when it changes
+  useEffect(() => {
+    if (!worker) return;
+
+    worker.postMessage({
+      type: "updateConfig",
+      config: {
+        nodeCount: config.nodeCount,
+        maxConnectionsPerNode: config.maxConnectionsPerNode,
+        connectionThreshold: config.connectionThreshold,
+        bloomEnabled: config.enableBloom,
+        bloomIntensity: config.bloomIntensity,
+        pulseSpeed: config.pulseSpeed,
+        reducedMotion,
+      },
+    });
+  }, [worker, config, reducedMotion]);
+
+  return (
+    <canvas
+      ref={setCanvasEl}
+      className="h-full w-full"
+      style={{ background: "transparent" }}
+    />
+  );
+}
+
+export interface NeuralNetworkSceneProps {
+  className?: string;
+  useOffscreen?: boolean; // Force offscreen mode (default: auto-detect)
+}
+
+export function NeuralNetworkScene({ className = "", useOffscreen }: NeuralNetworkSceneProps) {
   const isMobile = useIsMobile();
   const [performanceConfig, setPerformanceConfig] = useState<PerformanceConfig | null>(null);
   const reducedMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
   const [forceFallback, setForceFallback] = useState(false);
+  const [useWorker, setUseWorker] = useState(false);
+  const [workerFailed, setWorkerFailed] = useState(false);
   
   // Get initial performance config
   const initialConfig = usePerformanceTier();
@@ -123,7 +243,15 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
   useEffect(() => {
     setMounted(true);
     setPerformanceConfig(initialConfig);
-  }, [initialConfig]);
+    
+    // Decide whether to use offscreen canvas
+    // Only use if explicitly requested or if device supports it and is high-tier
+    const shouldUseOffscreen = useOffscreen ?? (
+      supportsOffscreenCanvas() && 
+      initialConfig.tier === "high"
+    );
+    setUseWorker(shouldUseOffscreen);
+  }, [initialConfig, useOffscreen]);
 
   // Handle dynamic downgrade when FPS is too low
   const handleDowngrade = useCallback(() => {
@@ -165,6 +293,12 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
     });
   }, []);
 
+  // Handle worker failure - fall back to main thread
+  const handleWorkerFallback = useCallback(() => {
+    setWorkerFailed(true);
+    setUseWorker(false);
+  }, []);
+
   // Show nothing during SSR to prevent hydration mismatch
   if (!mounted || !performanceConfig) {
     return <div className={`h-full w-full ${className}`} />;
@@ -175,7 +309,20 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
     return <FallbackBackground />;
   }
 
-  // Desktop 3D scene with adaptive performance
+  // Try offscreen canvas (Web Worker) if supported and enabled
+  if (useWorker && !workerFailed) {
+    return (
+      <div className={`h-full w-full ${className}`}>
+        <OffscreenRenderer
+          config={performanceConfig}
+          reducedMotion={reducedMotion}
+          onFallback={handleWorkerFallback}
+        />
+      </div>
+    );
+  }
+
+  // Main thread rendering with React Three Fiber
   return (
     <div className={`h-full w-full ${className}`}>
       <Canvas
