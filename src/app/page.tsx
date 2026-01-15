@@ -3,69 +3,48 @@ import Link from "next/link";
 import Container from "../components/Container";
 import Section from "../components/Section";
 
-import { Rocket, Briefcase, Wrench, BarChart3, Eye, Sparkles, Network, Smartphone, Leaf } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { BarChart3, Eye, Sparkles, Network, Smartphone, Leaf } from "lucide-react";
 import { Marquee } from "@/components/magicui/marquee";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { NeuralNetworkScene } from "@/components/three/NeuralNetworkScene";
 
 export default function Home() {
   return (
     <div>
-      <Section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-between">
+      <Section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-start">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          {/* Large blobs */}
-          <div className="absolute -top-24 -left-16 h-[400px] w-[400px] rounded-full blur-3xl opacity-20 bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff]"></div>
-          <div className="absolute -bottom-24 -right-16 h-[400px] w-[400px] rounded-full blur-3xl opacity-20 bg-gradient-to-r from-[#c55bff] via-[#7b5bff] to-[#5b9dff]"></div>
-          
-          {/* Medium blobs */}
-          <div className="absolute top-1/4 right-1/4 h-[300px] w-[300px] rounded-full blur-3xl opacity-15 bg-gradient-to-r from-[#4a8eff] via-[#6a4aff] to-[#b44aff]"></div>
-          <div className="absolute bottom-1/3 left-1/3 h-[250px] w-[250px] rounded-full blur-3xl opacity-15 bg-gradient-to-r from-[#6cafff] via-[#8c6cff] to-[#d66cff]"></div>
-          
-          {/* Small blobs */}
-          <div className="absolute top-1/2 left-1/6 h-[200px] w-[200px] rounded-full blur-3xl opacity-10 bg-gradient-to-r from-[#3d7eff] via-[#5d3dff] to-[#a73dff]"></div>
-          <div className="absolute top-1/6 right-1/6 h-[180px] w-[180px] rounded-full blur-3xl opacity-10 bg-gradient-to-r from-[#7dbfff] via-[#9d7dff] to-[#e77dff]"></div>
-          <div className="absolute bottom-1/4 left-1/2 h-[150px] w-[150px] rounded-full blur-3xl opacity-10 bg-gradient-to-r from-[#5e9fff] via-[#7e5eff] to-[#c85eff]"></div>
-          
-          {/* Tiny accent blobs */}
-          <div className="absolute top-3/4 right-1/3 h-[120px] w-[120px] rounded-full blur-3xl opacity-8 bg-gradient-to-r from-[#4f8fff] via-[#6f4fff] to-[#b94fff]"></div>
-          <div className="absolute bottom-1/6 right-1/6 h-[100px] w-[100px] rounded-full blur-3xl opacity-8 bg-gradient-to-r from-[#6cafff] via-[#8c6cff] to-[#d66cff]"></div>
-          <div className="absolute top-1/3 left-1/4 h-[80px] w-[80px] rounded-full blur-3xl opacity-8 bg-gradient-to-r from-[#7dbfff] via-[#9d7dff] to-[#e77dff]"></div>
+          <NeuralNetworkScene />
         </div>
         
         {/* Hero content - top portion */}
-        <Container className="flex-1 flex items-center">
-          <div className="py-8 md:py-10 lg:py-12">
-            <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4">
-              <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto" />
+        <Container className="flex items-start relative z-10">
+          <div className="py-12 md:py-18 lg:py-21 rounded-3xl bg-black/30 backdrop-blur-sm px-12 md:px-21 -mx-2">
+            <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+              <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto drop-shadow-lg" />
               Generative AI @ Cornell
             </h1>
-            <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-zinc-300 max-w-2xl text-center sm:text-left">
+            <p className="mt-12 md:mt-14 text-lg md:text-xl leading-relaxed text-zinc-200 max-w-4xl text-center sm:text-left drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
               Bridging builders, researchers, and industry leaders to explore the frontier of intelligent systems. Join us to develop cutting-edge AI tooling and learn with a community that ships.
             </p>
-            <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 items-center sm:items-start">
-              <Link href="/apply" className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-8 py-3 text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 min-w-[200px] sm:min-w-0">
+            <div className="mt-14 md:mt-16 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
+              <Link href="/apply" className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-10 py-4 text-lg text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 min-w-[180px] sm:min-w-0">
                 Apply now
               </Link>
-              <Link href="/portfolio" className="inline-flex items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm px-8 py-3 text-white border border-white/20 shadow-md shadow-black/20 hover:bg-white/20 hover:shadow-lg hover:shadow-black/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 min-w-[200px] sm:min-w-0">
+              <Link href="/portfolio" className="inline-flex items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm px-10 py-4 text-lg text-white border border-white/20 shadow-md shadow-black/20 hover:bg-white/20 hover:shadow-lg hover:shadow-black/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 min-w-[180px] sm:min-w-0">
                 Explore Initiatives
               </Link>
             </div>
           </div>
         </Container>
 
-                {/* Partners section - bottom portion */}
-        <div className="w-full">
-          <div className="text-center mb-6 px-6 md:px-8">
+                {/* Partners section */}
+        <div className="w-full mt-5 md:mt-6">
+          <div className="text-center mb-5 md:mb-6 px-6 md:px-8">
             <p className="text-base text-zinc-300 font-medium">Our Partners</p>
           </div>
-          <div className="py-7 relative flex flex-col items-center justify-center overflow-hidden w-full">
-            {/* Background blobs for marquee contrast */}
-            <div aria-hidden className="pointer-events-none absolute inset-0">
-              <div className="absolute top-1/2 left-1/4 h-[200px] w-[200px] rounded-full blur-3xl opacity-25 bg-gradient-to-r from-[#5b9dff] via-[#7b5bff] to-[#c55bff]"></div>
-              <div className="absolute top-1/3 right-1/3 h-[150px] w-[150px] rounded-full blur-3xl opacity-20 bg-gradient-to-r from-[#4a8eff] via-[#6a4aff] to-[#b44aff]"></div>
-              <div className="absolute bottom-1/4 left-1/2 h-[180px] w-[180px] rounded-full blur-3xl opacity-30 bg-gradient-to-r from-[#6cafff] via-[#8c6cff] to-[#d66cff]"></div>
-              <div className="absolute top-1/4 right-1/6 h-[120px] w-[120px] rounded-full blur-3xl opacity-15 bg-gradient-to-r from-[#7dbfff] via-[#9d7dff] to-[#e77dff]"></div>
-            </div>
+          <div className="py-4 relative flex flex-col items-center justify-center overflow-hidden w-full">
+            {/* Background for logo contrast */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 bg-black/60 rounded-2xl"></div>
             <div
               className="
                 md:w-3/4 mx-auto

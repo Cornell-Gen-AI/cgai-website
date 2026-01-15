@@ -23,7 +23,7 @@ export default function ApplyPage() {
             <div className="apply-strikeout"> Build a superstar project.
             Show that you can use AI.
             Join us.</div>
-            We are currently not in the recruitment season. Check back in around the time of SP 26' instruction start.
+            We are currently not in the recruitment season. Check back in around the time of SP 26&apos; instruction start.
           </div>
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
