@@ -1,14 +1,16 @@
 "use client";
 
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { usePerformanceTier, PerformanceConfig } from "@/hooks/usePerformanceTier";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useNodeNetwork } from "./useNodeNetwork";
 import { NodeCloudBillboard } from "./NodeCloudBillboard";
-import { ConnectionLines } from "./ConnectionLines";
+import { ConnectionLinesOptimized } from "./ConnectionLinesOptimized";
 import { AnimatedCamera } from "./AnimatedCamera";
+import { useFrameRateMonitor } from "@/hooks/useFrameRateMonitor";
 
 // Fallback 2D background for mobile (matching existing site design)
 function FallbackBackground() {
@@ -36,7 +38,13 @@ function FallbackBackground() {
 }
 
 // Inner 3D scene component (needs to be inside Canvas)
-function Scene({ config }: { config: PerformanceConfig }) {
+interface SceneProps {
+  config: PerformanceConfig;
+  reducedMotion: boolean;
+  onDowngrade: () => void;
+}
+
+function Scene({ config, reducedMotion, onDowngrade }: SceneProps) {
   const network = useNodeNetwork({
     nodeCount: config.nodeCount,
     brainWidth: 20,
@@ -46,23 +54,40 @@ function Scene({ config }: { config: PerformanceConfig }) {
     maxConnectionsPerNode: config.maxConnectionsPerNode,
   });
 
+  // Monitor frame rate and trigger downgrade if needed
+  useFrameRateMonitor({
+    targetFPS: 25,
+    sampleSize: 60,
+    onDowngrade,
+  });
+
+  // Calculate pulse percentage based on tier
+  const pulsePercentage = config.tier === "high" ? 0.3 : config.tier === "medium" ? 0.2 : 0.1;
+
   return (
     <>
       <AnimatedCamera
         pathRadiusX={4}
         pathRadiusZ={5}
-        pathSpeed={0.06}
+        pathSpeed={reducedMotion ? 0 : 0.06}
         verticalAmount={2}
       />
       
       {/* Use 2D billboard nodes for better performance */}
-      <NodeCloudBillboard network={network} pulseSpeed={0.4} baseSize={0.08} />
-      <ConnectionLines 
+      <NodeCloudBillboard 
+        network={network} 
+        pulseSpeed={reducedMotion ? 0 : 0.4} 
+        baseSize={0.08} 
+      />
+      
+      {/* Optimized connection lines with GPU-based pulse animation */}
+      <ConnectionLinesOptimized 
         network={network} 
         pulseSpeed={config.pulseSpeed} 
         baseOpacity={0.18} 
-        curveSegments={config.curveSegments} 
-        pulseSize={0.08} 
+        pulseSize={0.08}
+        reducedMotion={reducedMotion}
+        pulsePercentage={pulsePercentage}
       />
 
       {/* Post-processing for subtle organic glow - conditional based on performance tier */}
@@ -86,21 +111,67 @@ export interface NeuralNetworkSceneProps {
 
 export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) {
   const isMobile = useIsMobile();
-  const performanceConfig = usePerformanceTier();
+  const [performanceConfig, setPerformanceConfig] = useState<PerformanceConfig | null>(null);
+  const reducedMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const [forceFallback, setForceFallback] = useState(false);
+  
+  // Get initial performance config
+  const initialConfig = usePerformanceTier();
 
   // Handle hydration mismatch by only rendering after mount
   useEffect(() => {
     setMounted(true);
+    setPerformanceConfig(initialConfig);
+  }, [initialConfig]);
+
+  // Handle dynamic downgrade when FPS is too low
+  const handleDowngrade = useCallback(() => {
+    setPerformanceConfig((prev) => {
+      if (!prev) return prev;
+      
+      // If already on low, fall back to 2D
+      if (prev.tier === "low") {
+        setForceFallback(true);
+        return prev;
+      }
+      
+      // Downgrade to next lower tier
+      if (prev.tier === "high") {
+        return {
+          ...prev,
+          tier: "medium" as const,
+          nodeCount: 250,
+          maxConnectionsPerNode: 3,
+          connectionThreshold: 10,
+          bloomIntensity: 0.5,
+          dpr: 0.75,
+          curveSegments: 3,
+        };
+      }
+      
+      // Medium -> Low
+      return {
+        ...prev,
+        tier: "low" as const,
+        nodeCount: 150,
+        maxConnectionsPerNode: 2,
+        connectionThreshold: 12,
+        bloomIntensity: 0,
+        enableBloom: false,
+        dpr: 0.5,
+        curveSegments: 2,
+      };
+    });
   }, []);
 
   // Show nothing during SSR to prevent hydration mismatch
-  if (!mounted) {
+  if (!mounted || !performanceConfig) {
     return <div className={`h-full w-full ${className}`} />;
   }
 
-  // Mobile fallback
-  if (isMobile) {
+  // Mobile or forced fallback (when 3D is too slow even at lowest settings)
+  if (isMobile || forceFallback) {
     return <FallbackBackground />;
   }
 
@@ -122,11 +193,15 @@ export function NeuralNetworkScene({ className = "" }: NeuralNetworkSceneProps) 
           far: 150,
           position: [4, 0, 0],
         }}
-        frameloop="always"
+        frameloop={reducedMotion ? "demand" : "always"}
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
-          <Scene config={performanceConfig} />
+          <Scene 
+            config={performanceConfig} 
+            reducedMotion={reducedMotion}
+            onDowngrade={handleDowngrade}
+          />
         </Suspense>
       </Canvas>
     </div>

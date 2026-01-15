@@ -9,10 +9,11 @@ interface NodeCloudBillboardProps {
   network: NodeNetwork;
   pulseSpeed?: number;
   baseSize?: number;
+  reducedMotion?: boolean;
 }
 
 // 2D billboard-based node rendering using Points (much faster than instanced spheres)
-export function NodeCloudBillboard({ network, pulseSpeed = 1.5, baseSize = 0.08 }: NodeCloudBillboardProps) {
+export function NodeCloudBillboard({ network, pulseSpeed = 1.5, baseSize = 0.08, reducedMotion = false }: NodeCloudBillboardProps) {
   const pointsRef = useRef<THREE.Points>(null);
 
   // Create geometry with positions and colors
@@ -54,6 +55,7 @@ export function NodeCloudBillboard({ network, pulseSpeed = 1.5, baseSize = 0.08 
       uniforms: {
         time: { value: 0 },
         pulseSpeed: { value: pulseSpeed },
+        reducedMotion: { value: reducedMotion ? 1.0 : 0.0 },
       },
       vertexShader: `
         attribute float size;
@@ -63,12 +65,13 @@ export function NodeCloudBillboard({ network, pulseSpeed = 1.5, baseSize = 0.08 
         varying float vAlpha;
         uniform float time;
         uniform float pulseSpeed;
+        uniform float reducedMotion;
         
         void main() {
           vColor = color;
           
-          // Pulsing animation
-          float pulse = 0.85 + 0.15 * sin(time * pulseSpeed + phase);
+          // Pulsing animation (disabled if reduced motion)
+          float pulse = reducedMotion > 0.5 ? 1.0 : 0.85 + 0.15 * sin(time * pulseSpeed + phase);
           float finalSize = baseSize * pulse;
           
           // Fade alpha based on distance for depth effect
@@ -106,7 +109,7 @@ export function NodeCloudBillboard({ network, pulseSpeed = 1.5, baseSize = 0.08 
       blending: THREE.AdditiveBlending,
       vertexColors: true,
     });
-  }, [pulseSpeed]);
+  }, [pulseSpeed, reducedMotion]);
 
   // Animate pulsing via shader uniform
   useFrame((state) => {
