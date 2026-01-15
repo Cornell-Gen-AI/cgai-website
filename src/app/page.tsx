@@ -6,19 +6,19 @@ import Section from "../components/Section";
 import { BarChart3, Eye, Sparkles, Network, Smartphone, Leaf } from "lucide-react";
 import { Marquee } from "@/components/magicui/marquee";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
-import { NeuralNetworkScene } from "@/components/three/NeuralNetworkScene";
+import { NeuralNetwork2D } from "@/components/NeuralNetwork2D";
 
 export default function Home() {
   return (
     <div>
       <Section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-start">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <NeuralNetworkScene />
+          <NeuralNetwork2D nodeCount={250} connectionDensity={0.2} />
         </div>
         
         {/* Hero content - top portion */}
         <Container className="flex items-start relative z-10">
-          <div className="py-12 md:py-18 lg:py-21 rounded-3xl bg-black/30 backdrop-blur-sm px-12 md:px-21 -mx-2">
+          <div className="py-12 md:py-18 lg:py-21 rounded-3xl bg-black/30 backdrop-blur-sm px-12 md:px-21 -mx-2 border border-white/20">
             <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto drop-shadow-lg" />
               Generative AI @ Cornell
