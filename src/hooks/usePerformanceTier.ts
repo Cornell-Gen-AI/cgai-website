@@ -148,9 +148,12 @@ function detectPerformanceTier(): PerformanceTier {
   // Check battery status (reduce if low/not charging)
   // This is async so we'll handle it separately with an update
 
-  // Determine tier based on score
-  if (score >= 4) return "high";
-  if (score >= 1) return "medium";
+  // Determine tier based on score (stricter thresholds for better performance on more devices)
+  // High: Only truly powerful machines (score >= 6)
+  // Medium: Decent machines (score >= 3)  
+  // Low: Everything else
+  if (score >= 6) return "high";
+  if (score >= 3) return "medium";
   return "low";
 }
 
