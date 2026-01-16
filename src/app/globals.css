@@ -12,9 +12,17 @@
   --font-display: var(--font-space-grotesk);
 }
 
+html {
+  min-width: 450px;
+  min-height: 750px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+  min-width: 450px;
+  min-height: 750px;
+  filter: brightness(1.2);
 }
 .apply-strikeout{
   text-decoration: line-through;

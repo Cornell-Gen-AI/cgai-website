@@ -11,22 +11,25 @@ import { NeuralNetwork2D } from "@/components/NeuralNetwork2D";
 export default function Home() {
   return (
     <div>
-      <Section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-start">
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <NeuralNetwork2D nodeCount={250} connectionDensity={0.2} />
+      <Section className="!pt-[2vh] !pb-0 relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-start bg-black/80">
+        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-75">
+          <NeuralNetwork2D nodeCount={105} connectionDensity={.45} />
         </div>
+        {/* Light overlay */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-white/2.5" />
         
         {/* Hero content - top portion */}
-        <Container className="flex items-start relative z-10">
-          <div className="py-12 md:py-18 lg:py-21 rounded-3xl bg-black/30 backdrop-blur-sm px-12 md:px-21 -mx-2 border border-white/20">
+        <Container className="flex items-center justify-center relative z-10 -translate-y-[0%]">
+          <div className="py-16 md:py-20 lg:py-24 rounded-3xl bg-black/30 backdrop-blur-sm px-8 md:px-12 -mx-2 border border-white/20 max-h-[calc(100vh-10vh-4rem)] overflow-hidden scale-90">
             <h1 className="h1 font-semibold tracking-tight text-white flex items-center gap-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-              <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-24 md:h-32 w-auto drop-shadow-lg" />
+              <img src="/cgaiweb.svg" alt="CGAI Logo" className="h-20 md:h-24 w-auto drop-shadow-lg" />
               Generative AI @ Cornell
             </h1>
-            <p className="mt-12 md:mt-14 text-lg md:text-xl leading-relaxed text-zinc-200 max-w-4xl text-center sm:text-left drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
+            <p className="md:mt-18 md:mt-12 text-lg md:text-xl leading-relaxed text-zinc-200 max-w-4xl text-center sm:text-left drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
               Bridging builders, researchers, and industry leaders to explore the frontier of intelligent systems. Join us to develop cutting-edge AI tooling and learn with a community that ships.
+              Bridging builders, researchers, and industry leaders to explore the frontier of intelligent.
             </p>
-            <div className="mt-14 md:mt-16 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
+            <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
               <Link href="/apply" className="inline-flex items-center justify-center rounded-2xl bg-red-600 px-10 py-4 text-lg text-white shadow-md shadow-red-500/20 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 min-w-[180px] sm:min-w-0">
                 Apply now
               </Link>
@@ -37,25 +40,18 @@ export default function Home() {
           </div>
         </Container>
 
-                {/* Partners section */}
-        <div className="w-full mt-5 md:mt-6">
-          <div className="text-center mb-5 md:mb-6 px-6 md:px-8">
-            <p className="text-base text-zinc-300 font-medium">Our Partners</p>
-          </div>
-          <div className="py-4 relative flex flex-col items-center justify-center overflow-hidden w-full">
-            {/* Background for logo contrast */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 bg-black/60 rounded-2xl"></div>
-            <div
-              className="
-                md:w-3/4 mx-auto
-                sm:w-full
-                [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_80%,transparent_100%)]
-                [mask-repeat:no-repeat]
-                [mask-size:100%_100%]
-               
-              "
-            >
-      <Marquee pauseOnHover className="[--duration:15s] w-full">
+        {/* Our Partners text */}
+        <div className="text-center mt-4 mb-6 px-6 md:px-8 -translate-y-[50%]">
+          <p className="text-base text-zinc-300 font-medium">Our Partners</p>
+        </div>
+
+        {/* Partners section */}
+        <div className="w-full -translate-y-[2%]">
+          <div className="pb-[6rem] relative flex items-center justify-center overflow-hidden w-full min-h-[140px]">
+            {/* Full-width background */}
+            <div className="absolute inset-0 w-full bg-black/60 rounded-2xl h-[140px] flex justify-center items-center flex-wrap -mt-[25px] -mb-[25px]"></div>
+            <div className="relative w-full flex items-center justify-center translate-y-5">
+      <Marquee pauseOnHover className="[--duration:15s] w-full max-w-7xl mx-auto [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
         {[
           { src: "/chartercommunications.png", alt: "Charter Communications" },
           { src: "/vero.webp", alt: "Vero" },
@@ -70,7 +66,7 @@ export default function Home() {
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-16 sm:h-20 w-auto object-contain rounded-lg"
+              className="h-12 sm:h-14 w-auto object-contain rounded-lg"
             />
           </div>
         ))}

@@ -9,13 +9,11 @@ const executiveBoard = [
   { name: "Erik Pedersen", role: "Vice-President", imageSrc: "/pfps/erik.png", linkedInUrl: "https://www.linkedin.com/in/erikzhangpedersen/" },
   { name: "Morgan Stuart", role: "Lead Engineer + NME Chair", imageSrc: "/pfps/morgan.png", linkedInUrl: "https://www.linkedin.com/in/morgan-nstuart/" },
   { name: "Merek Soriano", role: "Head of Corporate Partnership", imageSrc: "/pfps/merek.png", linkedInUrl: "https://www.linkedin.com/in/merek-soriano-0ba570291/" },
-  { name: "David Lee", role: "Head of Product", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
- 
 ];
 
-const administrationTeam = [
-  { name: "Mahdi Choudhury", role: "Treasurer", imageSrc: "/pfps/mahdi.png", linkedInUrl: "https://www.linkedin.com/in/mahdi-choudhury-h/" },
-  { name: "Akul Maheshwari", role: "DEI Chair", imageSrc: "/pfps/akul.png", linkedInUrl: "https://www.linkedin.com/in/akul-maheshwari/" },
+const abroadTeam = [
+  { name: "David Lee", role: "Head of Product", imageSrc: "/pfps/david.png", linkedInUrl: "https://www.linkedin.com/in/dave-lee-716318242/" },
+  { name: "Audrey Lewellen", role: "QuickFi – Vendor Due Diligence AI", imageSrc: "/pfps/audrey.png", linkedInUrl: "https://www.linkedin.com/in/audrey-lewellen-686823355/" },
 ];
 
 const developmentTeam = [
@@ -28,7 +26,6 @@ const developmentTeam = [
   // QuickFi – Vendor Due Diligence AI
   { name: "Brandon Xu", role: "QuickFi – Vendor Due Diligence AI", year: 2, imageSrc: "/pfps/brandon.png", linkedInUrl: "https://www.linkedin.com/in/brandon-xu-284748322/" },
   { name: "Eddie Hu", role: "QuickFi – Vendor Due Diligence AI", year: 1, imageSrc: "/pfps/blank_profile.webp", linkedInUrl: "" },
-  { name: "Audrey Lewellen", role: "QuickFi – Vendor Due Diligence AI", year: 3, imageSrc: "/pfps/audrey.png", linkedInUrl: "https://www.linkedin.com/in/audrey-lewellen-686823355/" },
   { name: "Mateo del Rio Lanse", role: "QuickFi – Vendor Due Diligence AI", year: 1, imageSrc: "/pfps/mateo.png", linkedInUrl: "https://www.linkedin.com/in/mdelriolanse" },
   // QuickFi – Invoice AI Analysis
   { name: "Nicole Luo", role: "QuickFi – Invoice AI Analysis", year: 3, imageSrc: "/pfps/nicole.png", linkedInUrl: "https://www.linkedin.com/in/nicoleluo7/" },
@@ -81,40 +78,18 @@ export default function TeamPage() {
           {/* Development Team */}
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-white mb-8">Development</h2>
-            <div>
-              {(() => {
-                const groups: { role: string; members: typeof developmentTeam }[] = [];
-                developmentTeam.forEach((member) => {
-                  const lastGroup = groups[groups.length - 1];
-                  if (!lastGroup || lastGroup.role !== member.role) {
-                    groups.push({ role: member.role, members: [member] });
-                  } else {
-                    lastGroup.members.push(member);
-                  }
-                });
-                // Sort members within each group by year (descending)
-                groups.forEach((group) => {
-                  group.members.sort((a, b) => b.year - a.year);
-                });
-                return groups.map((group, groupIndex) => (
-                  <div key={group.role}>
-                    {groupIndex > 0 && <div className="my-8 md:my-10 border-t border-white/10"></div>}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-10">
-                      {group.members.map((m) => (
-                        <MemberCard key={m.name} {...m} />
-                      ))}
-                    </div>
-                  </div>
-                ));
-              })()}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-10">
+              {developmentTeam.map((m) => (
+                <MemberCard key={m.name} {...m} />
+              ))}
             </div>
           </div>
 
-          {/* Administration Team */}
+          {/* Abroad */}
           <div className="mt-16">
-            <h2 className="text-2xl font-bold text-white mb-8">Administration</h2>
+            <h2 className="text-2xl font-bold text-white mb-8">Abroad (Out for Semester)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-10">
-              {administrationTeam.map((m) => (
+              {abroadTeam.map((m) => (
                 <MemberCard key={m.name} {...m} />
               ))}
             </div>

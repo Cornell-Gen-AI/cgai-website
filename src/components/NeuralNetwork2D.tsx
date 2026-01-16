@@ -65,18 +65,91 @@ export function NeuralNetwork2D({
     const nodes: Node[] = [];
     const connections: Connection[] = [];
 
-    // Create nodes distributed across the canvas with depth layers
-    for (let i = 0; i < nodeCount; i++) {
-      const depth = Math.random(); // 0 = far (small, slow), 1 = close (large, fast)
-      const x = Math.random() * width;
-      const y = Math.random() * height;
+    // Calculate weighted perimeter - favor left/right edges (2x weight)
+    const sideWeight = 2.0;
+    const weightedPerimeter = 2 * width + 2 * height * sideWeight;
+    const edgeNodeCount = Math.floor(nodeCount * 0.7);
+    const centerNodeCount = nodeCount - edgeNodeCount;
+    const edgeThickness = 0.25;
+    
+    // Create edge nodes distributed around perimeter, weighted towards left/right
+    for (let i = 0; i < edgeNodeCount; i++) {
+      const depth = Math.random();
+      
+      // Calculate base position along weighted perimeter with slight randomization
+      const basePerimeterPos = (i / edgeNodeCount) * weightedPerimeter;
+      const jitter = (Math.random() - 0.5) * (weightedPerimeter / edgeNodeCount) * 0.6;
+      let perimeterPos = (basePerimeterPos + jitter + weightedPerimeter) % weightedPerimeter;
+      
+      let x: number, y: number;
+      const edgeOffset = Math.random() * edgeThickness;
+      
+      // Map weighted perimeter position to actual edges
+      if (perimeterPos < width) {
+        // Top edge
+        x = perimeterPos;
+        y = edgeOffset * height;
+      } else if (perimeterPos < width + height * sideWeight) {
+        // Right edge (weighted)
+        x = width - edgeOffset * width;
+        y = (perimeterPos - width) / sideWeight;
+      } else if (perimeterPos < 2 * width + height * sideWeight) {
+        // Bottom edge
+        x = width - (perimeterPos - width - height * sideWeight);
+        y = height - edgeOffset * height;
+      } else {
+        // Left edge (weighted)
+        x = edgeOffset * width;
+        y = height - (perimeterPos - 2 * width - height * sideWeight) / sideWeight;
+      }
       
       nodes.push({
         x,
         y,
         baseX: x,
         baseY: y,
-        size: 2 + depth * 4, // 2-6px based on depth
+        size: 2 + depth * 4,
+        depth,
+        phase: Math.random() * Math.PI * 2,
+        driftSpeed: 0.2 + Math.random() * 0.3,
+        driftAngle: Math.random() * Math.PI * 2,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      });
+    }
+    
+    // Define hero exclusion zone (center area where hero content sits)
+    const heroZone = {
+      left: width * 0.15,
+      right: width * 0.85,
+      top: height * 0.08,
+      bottom: height * 0.65,
+    };
+    
+    // Helper to check if point is in hero zone
+    const isInHeroZone = (x: number, y: number) => {
+      return x > heroZone.left && x < heroZone.right && 
+             y > heroZone.top && y < heroZone.bottom;
+    };
+    
+    // Create center nodes with random placement, avoiding hero zone and bottom 20%
+    for (let i = 0; i < centerNodeCount; i++) {
+      const depth = Math.random();
+      let x: number, y: number;
+      let attempts = 0;
+      
+      // Try to place outside hero zone and avoid bottom 20%, but allow some through with low probability
+      do {
+        x = Math.random() * width;
+        y = Math.random() * height * 0.8; // Bias towards top 80%
+        attempts++;
+      } while (isInHeroZone(x, y) && Math.random() > 0.05 && attempts < 10);
+      
+      nodes.push({
+        x,
+        y,
+        baseX: x,
+        baseY: y,
+        size: 2 + depth * 4,
         depth,
         phase: Math.random() * Math.PI * 2,
         driftSpeed: 0.2 + Math.random() * 0.3,
@@ -257,20 +330,56 @@ export function NeuralNetwork2D({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size
-    const updateSize = () => {
+    // Track previous dimensions for rescaling
+    let prevWidth = 0;
+    let prevHeight = 0;
+    let isInitialized = false;
+
+    // Set canvas size and handle network - runs immediately on resize
+    const updateSize = (forceReinit = false) => {
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
+      const newWidth = rect.width;
+      const newHeight = rect.height;
+      
+      // Skip if dimensions haven't changed
+      if (newWidth === prevWidth && newHeight === prevHeight && isInitialized) {
+        return;
+      }
+      
+      canvas.width = newWidth * dpr;
+      canvas.height = newHeight * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
       ctx.scale(dpr, dpr);
       
-      // Reinitialize network on resize
-      initializeNetwork(rect.width, rect.height);
+      if (!isInitialized || forceReinit) {
+        // First load - initialize network
+        initializeNetwork(newWidth, newHeight);
+        isInitialized = true;
+      } else if (prevWidth > 0 && prevHeight > 0) {
+        // Rescale existing nodes instead of regenerating
+        const scaleX = newWidth / prevWidth;
+        const scaleY = newHeight / prevHeight;
+        
+        nodesRef.current.forEach((node) => {
+          node.baseX *= scaleX;
+          node.baseY *= scaleY;
+          node.x *= scaleX;
+          node.y *= scaleY;
+        });
+      }
+      
+      prevWidth = newWidth;
+      prevHeight = newHeight;
     };
 
+    // Use ResizeObserver for immediate, efficient resize handling
+    const resizeObserver = new ResizeObserver(() => {
+      updateSize();
+    });
+    resizeObserver.observe(canvas);
+
     updateSize();
-    window.addEventListener("resize", updateSize);
 
     // Animation loop
     let startTime = performance.now();
@@ -289,7 +398,7 @@ export function NeuralNetwork2D({
     }
 
     return () => {
-      window.removeEventListener("resize", updateSize);
+      resizeObserver.disconnect();
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
